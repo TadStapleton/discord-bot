@@ -1,0 +1,83 @@
+# discord-bot
+
+import random
+import asyncio
+import requests
+import discord
+import time
+from discord import Game
+from discord.ext import commands
+from discord.ext.commands import Bot
+
+BOT_PREFIX = ("?", "!")
+TOKEN = "NDI2MTE2MzcxNjU5ODgyNTA4.DZR3OA.BN4Hln_8EO9BQHYmu8EmgsbTfOQ"  # Get at discordapp.com/developers/applications/me
+
+client = Bot(command_prefix=BOT_PREFIX)
+
+#startup text
+@client.event
+async def on_ready():
+    print("Bot is now running")
+
+#kick user
+@client.command(pass_context=True)
+@commands.has_role("Tad & Jason")
+async def kick(ctx, user: discord.Member):
+    await client.say("goodbye")
+    await client.kick(user)
+
+#delete channel
+@client.command(pass_context=True)
+@commands.has_role("Tad & Jason")
+async def delete_channel(ctx, name: discord.Channel):
+    await client.say("Channel Deleted")
+    await client.delete_channel(name)
+
+#in message
+@client.event
+async def on_message(message):
+
+    if message.author.id != "426116371659882508":
+
+            #image on phrase
+        if "jason" in message.content.lower():
+            #if timer - last > 10:
+            await client.send_message(message.channel, "did someone say Jason?")
+            await client.send_file(message.channel, "C:\Programming\discord_bot\jasonimag.png", filename="jasonimag.png", content=None,tts=False)
+            #last = timer
+            #await client.send_message(message.channel, "https://en.wikipedia.org/wiki/Violence_against_LGBT_people" )
+
+
+        if "https://www.youtube" in message.content:
+
+                videos = client.get_channel("431549728560381952")
+                await client.send_message(videos, message.content)
+                await client.send_message(videos, "This video was posted by " + message.author.nick)
+                await client.delete_message(message)
+
+        if "https://youtu.be/" in message.content:
+
+                videos = client.get_channel("431549728560381952")
+                await client.send_message(videos, message.content)
+                await client.send_message(videos, "This video was posted by " + message.author.nick)
+                await client.delete_message(message)
+
+        #respond to a certain user
+        if message.author.id == "362404028602384384":
+
+                await client.send_message(message.channel, "buy civ")
+
+            #@ a user
+        if "civ" in message.content:
+            janeid = "<@362404028602384384>"
+            await client.send_message(message.channel, ' %s buy civ' % janeid)
+
+        if "hello" in message.content.lower():
+            await client.send_message(message.channel, "Hello? Sorry the dogs were being annoying.")
+
+            #print ID's in console
+        print(message.author.display_name + " id: " + message.author.id + " mention " + message.author.mention)
+
+
+
+client.run(TOKEN)
