@@ -1,4 +1,5 @@
-# discord-bot
+#WARNING: this code has not been clean and is full of bugs
+
 
 import random
 import asyncio
@@ -10,7 +11,7 @@ from discord.ext import commands
 from discord.ext.commands import Bot
 
 BOT_PREFIX = ("?", "!")
-TOKEN = "your token"  # Get at discordapp.com/developers/applications/me
+TOKEN = "<your token>"  # Get at discordapp.com/developers/applications/me
 
 client = Bot(command_prefix=BOT_PREFIX)
 
@@ -41,12 +42,10 @@ async def on_message(message):
 
             #image on phrase
         if "jason" in message.content.lower():
-            #if timer - last > 10:
-            await client.send_message(message.channel, "did someone say Jason?")
-            await client.send_file(message.channel, "C:\Programming\discord_bot\jasonimag.png", filename="jasonimag.png", content=None,tts=False)
+
+            await client.send_file(message.channel, "C:\Programming\discord_bot\jasonimag.png", filename="jasonimag.png", content="did someone say Jason?",tts=False)
             #last = timer
             #await client.send_message(message.channel, "https://en.wikipedia.org/wiki/Violence_against_LGBT_people" )
-
 
         if "https://www.youtube" in message.content:
 
@@ -75,9 +74,36 @@ async def on_message(message):
         if "hello" in message.content.lower():
             await client.send_message(message.channel, "Hello? Sorry the dogs were being annoying.")
 
-            #print ID's in console
-        print(message.author.display_name + " id: " + message.author.id + " mention " + message.author.mention)
+        if message.author.id == "96016125220913152":
 
+                await client.add_reaction(message, ":poggers:432723249382817793")
+
+        if "👏" in message.content:
+            clap = message.content.replace(' ', '👏')
+            await client.send_message(message.channel, message.author.nick + ": " + clap)
+            await client.delete_message(message)
+
+        if ":USSR:" in message.content:
+            commie = message.content.replace(' ', " " + "<:USSR:403728202729521152>" + " ")
+            await client.send_message(message.channel, message.author.nick + ": " + commie)
+            await client.delete_message(message)
+
+        if "!ohno" in message.content:
+            await client.send_file(message.channel, "C:\Programming\discord_bot\ohno.png", filename="ohno.png", content="sent by " + message.author.nick, tts=False)
+            await client.delete_message(message)
+
+        if "!jesus" in message.content:
+            await client.send_file(message.channel, "C:\Programming\discord_bot\jesus.png", filename="jesus.png", content="sent by " + message.author.nick, tts=False)
+            await client.delete_message(message)
+
+        if "!nice" in message.content:
+            await client.send_file(message.channel, "C:\Programming\discord_bot\qnice.png", filename="qnice.png", content="sent by " + message.author.nick, tts=False)
+            await client.delete_message(message)
+
+        
+
+            #print ID's in console
+        print(message.author.display_name + " id: " + message.author.id + " content: " + message.content)
 
 
 client.run(TOKEN)
