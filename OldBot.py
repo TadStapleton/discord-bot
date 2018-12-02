@@ -10,7 +10,7 @@ from discord.ext import commands
 from discord.ext.commands import Bot
 
 BOT_PREFIX = ("?", "!")
-TOKEN = "NDM5Mjc0MDYxNjk3MTIyMzA2.DcQxYQ.uiK4QCrR_WbkWTX6yE1Y2Hdu2LI"  # Get at discordapp.com/developers/applications/me
+TOKEN = "NDM5Mjc0MDYxNjk3MTIyMzA2.DcQxYQ.uiK4QCrR_WbkWTX6yE1Y2Hdu2LI01"  # Get at discordapp.com/developers/applications/me
 
 client = Bot(command_prefix=BOT_PREFIX)
 
